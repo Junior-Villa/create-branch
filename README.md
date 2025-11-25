@@ -27,9 +27,10 @@ Flask-CORS
 
 ⚙️ Configuração
 Variáveis de ambiente
+```env
 GITHUB_OWNER=seu-usuario-ou-organizacao
 GITHUB_TOKEN=seu-token-github
-
+```
 Instale as dependências
 ```python
 pip install flask flask-cors requests
