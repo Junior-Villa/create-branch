@@ -42,6 +42,7 @@ A rota principal é:
 POST /webhook
 
 📦 Exemplo de Payload
+
 {
   "issue": {
     "key": "TASK-123",
