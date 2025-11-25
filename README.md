@@ -1,9 +1,9 @@
-🚀 Automação de Criação de Branches via Webhook
+- Automação de Criação de Branches via Webhook
 
 Este projeto automatiza a criação de branches em múltiplos repositórios do GitHub com base nos dados recebidos por um webhook (como Jira ou outras ferramentas de gestão).
 O objetivo é agilizar o início do desenvolvimento e padronizar o fluxo entre equipes e serviços.
 
-🧠 Como funciona
+-> Como funciona
 
 Uma issue é atualizada e dispara um webhook.
 
@@ -15,7 +15,7 @@ A API busca o último commit da branch base.
 
 Uma nova branch é criada automaticamente no GitHub.
 
-🛠 Tecnologias utilizadas
+-> Tecnologias utilizadas
 
 Python + Flask
 
@@ -25,28 +25,28 @@ Requests
 
 Flask-CORS
 
-⚙️ Configuração
+-> Configuração
 Variáveis de ambiente
 ```env
 GITHUB_OWNER=seu-usuario-ou-organizacao
 GITHUB_TOKEN=seu-token-github
 ```
-Instale as dependências
+-> Instale as dependências
 ```python
 pip install flask flask-cors requests
 ```
 
-Execute o serviço
+-> Execute o serviço
 ```python
 python app.py
 ```
 
 
 A rota principal é:
-
+```http
 POST /webhook
-
-📦 Exemplo de Payload
+```
+-> Exemplo de Payload
 
 ```json
 {
@@ -58,8 +58,7 @@ POST /webhook
 }
 ```
 
-🧩 Personalização
-
+-> Personalização
 Você define no código qual label cria branch em qual repositório:
 
 ```
