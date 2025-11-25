@@ -31,10 +31,14 @@ GITHUB_OWNER=seu-usuario-ou-organizacao
 GITHUB_TOKEN=seu-token-github
 
 Instale as dependências
+```python
 pip install flask flask-cors requests
+```
 
 Execute o serviço
+```python
 python app.py
+```
 
 
 A rota principal é:
@@ -43,6 +47,7 @@ POST /webhook
 
 📦 Exemplo de Payload
 
+```json
 {
   "issue": {
     "key": "TASK-123",
@@ -50,27 +55,19 @@ POST /webhook
     "labels": ["PROJECT_BACKEND"]
   }
 }
+```
 
 🧩 Personalização
 
 Você define no código qual label cria branch em qual repositório:
 
+```
 LABEL_TO_REPO = {
     "PROJECT_BACKEND": "backend-service",
     "PROJECT_FRONTEND": "frontend-app",
     "PROJECT_MOBILE": "mobile-flutter"
 }
-
+```
 
 Basta ajustar conforme sua estrutura.
 
-📌 Resultado da API
-{
-  "message": "Processamento concluído",
-  "details": [
-    {
-      "repo": "backend-service",
-      "result": "Branch criada com sucesso"
-    }
-  ]
-}
