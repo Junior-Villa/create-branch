@@ -1,18 +1,21 @@
-Automação de Criação de Branches via Webhook
+🚀 Automação de Criação de Branches via Webhook
 
-Este projeto recebe webhooks de ferramentas externas (como Jira) e cria automaticamente branches em repositórios do GitHub, de acordo com os labels definidos em cada issue. A ideia é agilizar o início do desenvolvimento e evitar trabalho repetitivo.
+Este projeto automatiza a criação de branches em múltiplos repositórios do GitHub com base nos dados recebidos por um webhook (como Jira ou outras ferramentas de gestão).
+O objetivo é agilizar o início do desenvolvimento e padronizar o fluxo entre equipes e serviços.
 
-Como funciona
+🧠 Como funciona
 
-O webhook envia os dados da issue.
+Uma issue é atualizada e dispara um webhook.
 
-A API identifica quais repositórios devem ser atualizados com base nos labels.
+O serviço recebe os dados (branch base, labels, chave da issue).
 
-Ela consulta o último commit da branch base e cria uma nova branch no GitHub.
+O label informa qual repositório deve receber a nova branch.
 
-Simples e flexível para quem trabalha com vários serviços ao mesmo tempo.
+A API busca o último commit da branch base.
 
-Tecnologias
+Uma nova branch é criada automaticamente no GitHub.
+
+🛠 Tecnologias utilizadas
 
 Python + Flask
 
@@ -20,21 +23,17 @@ GitHub REST API
 
 Requests
 
-Configuração
+Flask-CORS
 
-Defina as variáveis de ambiente:
+⚙️ Configuração
+Variáveis de ambiente
+GITHUB_OWNER=seu-usuario-ou-organizacao
+GITHUB_TOKEN=seu-token-github
 
-GITHUB_OWNER=seu-usuario-ou-org
-GITHUB_TOKEN=seu-token-aqui
-
-
-Instale as dependências:
-
+Instale as dependências
 pip install flask flask-cors requests
 
-
-Execute:
-
+Execute o serviço
 python app.py
 
 
@@ -42,7 +41,7 @@ A rota principal é:
 
 POST /webhook
 
-Exemplo de payload
+📦 Exemplo de Payload
 {
   "issue": {
     "key": "TASK-123",
@@ -51,11 +50,26 @@ Exemplo de payload
   }
 }
 
-Personalização
+🧩 Personalização
 
-No código existe um dicionário simples onde você define a relação entre labels e repositórios:
+Você define no código qual label cria branch em qual repositório:
 
 LABEL_TO_REPO = {
     "PROJECT_BACKEND": "backend-service",
-    "PROJECT_FRONTEND": "frontend-app"
+    "PROJECT_FRONTEND": "frontend-app",
+    "PROJECT_MOBILE": "mobile-flutter"
+}
+
+
+Basta ajustar conforme sua estrutura.
+
+📌 Resultado da API
+{
+  "message": "Processamento concluído",
+  "details": [
+    {
+      "repo": "backend-service",
+      "result": "Branch criada com sucesso"
+    }
+  ]
 }
