@@ -6,8 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Mapeamento entre labels e repositórios
-# (Pode ser público — não contém dados sensíveis)
+# Mapeamento de labels e repositórios
 LABEL_TO_REPO = {
     "PROJECT_BACKEND": "backend-service",
     "PROJECT_FRONTEND": "frontend-app",
@@ -26,19 +25,18 @@ def handle_webhook():
     if not issue_data:
         return jsonify({'error': 'Issue data not provided'}), 400
 
-    issue_key = issue_data.get('key')            # Nome da nova branch
-    source_branch = issue_data.get('source_branch')  # Branch base (ex: "main")
+    issue_key = issue_data.get('key')            # Nome da nova branch sera criado com mesmo nome da key enviada
+    source_branch = issue_data.get('source_branch')  # Branch de origem (ex: "main")
     issue_labels = issue_data.get('labels', [])
 
     if not issue_key or not source_branch:
         return jsonify({'error': 'Missing required fields'}), 400
 
-    # Credenciais via variáveis de ambiente (seguro para código público)
     github_owner = os.environ.get("GITHUB_OWNER")
     github_token = os.environ.get("GITHUB_TOKEN")
 
     if not github_owner or not github_token:
-        return jsonify({'error': 'GitHub credentials not configured'}), 500
+        return jsonify({'error': 'Credenciais do Github nao encontradas'}), 500
 
     headers = {
         "Authorization": f"token {github_token}",
